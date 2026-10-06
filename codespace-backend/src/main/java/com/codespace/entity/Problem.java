@@ -1,8 +1,9 @@
 package com.codespace.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
-
+@Data
 @Entity
 @Table(name="problems")
 public class Problem {

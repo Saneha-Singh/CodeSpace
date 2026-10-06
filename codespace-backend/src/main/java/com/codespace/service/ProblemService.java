@@ -20,4 +20,8 @@ public class ProblemService {
     public List<Problem> getAllProblmes(){
         return problemRepository.findAll();
     }
+
+    public Problem createProblem(Problem problem){
+        return problemRepository.save(problem);
+    }
 }
