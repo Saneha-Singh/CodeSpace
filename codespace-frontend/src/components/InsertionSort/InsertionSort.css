@@ -1,0 +1,216 @@
+/* =========================
+   INSERTION STAGE
+   ========================= */
+
+.insertion-stage {
+  position: relative;
+
+  width: 860px;
+  height: 400px;
+
+  margin: 0 auto;
+
+  overflow: visible;
+}
+
+
+/* =========================
+   FIXED ARRAY SLOTS
+   ========================= */
+
+.array-boxes {
+  position: absolute;
+
+  left: 0;
+  bottom: 50px;
+
+  display: flex;
+  gap: 20px;
+
+  z-index: 1;
+}
+
+.array-box {
+  width: 100px;
+  height: 150px;
+
+  border: 2px dashed #475569;
+  border-radius: 14px;
+
+  background: rgba(15, 23, 42, 0.45);
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  padding-bottom: 10px;
+
+  box-sizing: border-box;
+
+  color: #64748b;
+  font-size: 13px;
+}
+
+
+/* =========================
+   MOVING BOX LAYER
+   ========================= */
+
+.insertion-characters {
+  position: absolute;
+
+  left: 0;
+  bottom: 50px;
+
+  width: 100%;
+  height: 150px;
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   INDIVIDUAL BOX
+   ========================= */
+
+.insertion-character {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100px;
+  height: 150px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    left 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    bottom 600ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  will-change: left, bottom;
+
+  z-index: 5;
+}
+
+
+/* =========================
+   VALUE BOX
+   ========================= */
+
+.value-box {
+  width: 82px;
+  height: 82px;
+
+  border-radius: 14px;
+
+  background: #1e293b;
+
+  border: 3px solid #64748b;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  color: white;
+
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease,
+    border-color 300ms ease;
+}
+
+
+/* =========================
+   PICKED BOX
+   ========================= */
+
+.insertion-character.active {
+  /*
+    Lift the box clearly above
+    the other boxes.
+  */
+  bottom: 190px;
+
+  z-index: 50;
+}
+
+.insertion-character.active .value-box {
+  transform: scale(1.08);
+
+  border-color: #facc15;
+
+  box-shadow:
+    0 0 0 5px rgba(250, 204, 21, 0.15),
+    0 18px 35px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================
+   SHIFTING BOX
+   ========================= */
+
+.insertion-character.shifting {
+  z-index: 20;
+}
+
+.insertion-character.shifting .value-box {
+  border-color: #60a5fa;
+
+  transform: scale(1.04);
+}
+
+
+/* =========================
+   SORTED
+   ========================= */
+
+.insertion-character.sorted .value-box {
+  border-color: #22c55e;
+}
+
+
+/* =========================
+   POSITION NUMBER
+   ========================= */
+
+.position-number {
+  position: absolute;
+
+  bottom: -30px;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   ACTIVE POSITION
+   ========================= */
+
+.insertion-character.active .position-number {
+  color: #facc15;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 950px) {
+
+  .insertion-stage {
+    transform: scale(0.85);
+    transform-origin: top center;
+    margin-bottom: -50px;
+  }
+
+}

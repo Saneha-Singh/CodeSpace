@@ -1,0 +1,833 @@
+/* ========================================
+   GLOBAL
+======================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: #070b14;
+  color: white;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+.app {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(70, 80, 180, 0.15),
+      transparent 40%
+    ),
+    #070b14;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.header {
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 7%;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.logo-icon {
+  color: #8b7cff;
+}
+
+.tagline {
+  color: #8c91a5;
+  font-size: 14px;
+}
+
+
+/* ========================================
+   MAIN
+======================================== */
+
+.container {
+  width: min(1100px, 92%);
+
+  margin: auto;
+
+  padding: 60px 0;
+}
+
+
+/* ========================================
+   TITLE
+======================================== */
+
+.title-section {
+  text-align: center;
+
+  margin-bottom: 40px;
+}
+
+.badge {
+  display: inline-block;
+
+  padding: 7px 14px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(139, 124, 255, 0.12);
+
+  color: #a69cff;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  margin-bottom: 18px;
+}
+
+.title-section h1 {
+  font-size: clamp(42px, 7vw, 70px);
+
+  line-height: 1;
+
+  margin-bottom: 15px;
+}
+
+.title-section h1 span {
+  color: #8b7cff;
+}
+
+.title-section p {
+  color: #9298aa;
+
+  font-size: 17px;
+}
+
+
+/* ========================================
+   VISUALIZER
+======================================== */
+
+.visualizer {
+  background: #0d1422;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ========================================
+   VISUALIZER HEADER
+======================================== */
+
+.visualizer-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 25px 30px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.07);
+}
+
+.visualizer-header h2 {
+  font-size: 22px;
+}
+
+.message {
+  color: #a69cff;
+
+  margin-top: 7px;
+
+  font-size: 14px;
+}
+
+.complexity {
+  display: flex;
+
+  gap: 25px;
+}
+
+.complexity div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.complexity span {
+  color: #777e92;
+
+  font-size: 12px;
+}
+
+.complexity strong {
+  font-size: 15px;
+}
+
+
+/* ========================================
+   CHARACTER STAGE
+======================================== */
+
+.characters-container {
+  height: 500px;
+
+  position: relative;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.characters {
+  position: relative;
+
+  height: 100%;
+
+  /*
+    6 positions × 120px
+    plus some extra room.
+  */
+
+  min-width: 850px;
+}
+
+
+/* ========================================
+   CHARACTER WRAPPER
+======================================== */
+
+.character-wrapper {
+  width: 80px;
+
+  position: absolute;
+
+  bottom: 45px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  z-index: 2;
+
+  /*
+    IMPORTANT:
+    We animate LEFT instead of transform.
+
+    This means the horizontal movement
+    won't conflict with the active
+    translateY animation.
+  */
+
+  transition:
+    left 650ms cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+
+/* ========================================
+   NUMBER
+======================================== */
+
+.number {
+  font-size: 22px;
+
+  font-weight: 800;
+
+  margin-bottom: 18px;
+
+  position: relative;
+
+  z-index: 30;
+
+  transition:
+    transform 0.3s,
+    color 0.3s;
+}
+
+
+/* ========================================
+   MINION
+======================================== */
+
+.minion {
+  width: 65px;
+
+  position: relative;
+
+  /*
+    Height is controlled by React.
+  */
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffe04d,
+      #eab62d
+    );
+
+  border-radius:
+    34px
+    34px
+    20px
+    20px;
+
+  border:
+    3px solid #f3c832;
+
+  box-shadow:
+    inset 0 -15px 0 rgba(0, 0, 0, 0.08);
+
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+
+/* ========================================
+   GOGGLES
+======================================== */
+
+.goggles {
+  position: absolute;
+
+  top: 18px;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  display: flex;
+
+  gap: 2px;
+
+  z-index: 5;
+}
+
+.goggle {
+  width: 28px;
+  height: 28px;
+
+  border-radius: 50%;
+
+  background: #6b6b6b;
+
+  border:
+    3px solid #333;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.eye {
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.pupil {
+  width: 7px;
+  height: 7px;
+
+  background: #222;
+
+  border-radius: 50%;
+}
+
+
+/* ========================================
+   MOUTH
+======================================== */
+
+.mouth {
+  position: absolute;
+
+  width: 10px;
+  height: 6px;
+
+  border-bottom:
+    2px solid #222;
+
+  border-radius: 50%;
+
+  left: 50%;
+
+  top: 53px;
+
+  transform:
+    translateX(-50%);
+
+  z-index: 6;
+}
+
+
+/* ========================================
+   OVERALL
+======================================== */
+
+.overall {
+  position: absolute;
+
+  width: 69px;
+
+  height: 45%;
+
+  bottom: 0;
+
+  left: -5px;
+
+  background: #286bb5;
+
+  border-radius:
+    20px
+    20px
+    10px
+    10px;
+
+  z-index: 1;
+}
+
+
+/* ========================================
+   ARMS
+======================================== */
+
+.arm {
+  position: absolute;
+
+  width: 9px;
+
+  height: 38px;
+
+  background: #eab62d;
+
+  top: 48%;
+
+  border-radius: 10px;
+
+  z-index: 0;
+}
+
+.arm.left {
+  left: -9px;
+
+  transform:
+    rotate(15deg);
+}
+
+.arm.right {
+  right: -9px;
+
+  transform:
+    rotate(-15deg);
+}
+
+
+/* ========================================
+   FEET
+======================================== */
+
+.feet {
+  position: absolute;
+
+  bottom: -13px;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  display: flex;
+
+  gap: 15px;
+
+  z-index: 2;
+}
+
+.foot {
+  width: 17px;
+  height: 13px;
+
+  background: #252b36;
+
+  border-radius:
+    0
+    0
+    10px
+    10px;
+}
+
+
+/* ========================================
+   ACTIVE / COMPARING
+======================================== */
+
+.character-wrapper.active {
+  z-index: 20;
+}
+
+
+/*
+   Character rises when being compared.
+*/
+
+.character-wrapper.active .minion {
+  transform:
+    translateY(-18px)
+    scale(1.08);
+
+  box-shadow:
+    0 0 0 5px
+      rgba(139, 124, 255, 0.18),
+
+    0 0 35px
+      rgba(139, 124, 255, 0.55);
+}
+
+
+/*
+   Number rises together with
+   the character.
+
+   This prevents the Minion
+   from covering the number.
+*/
+
+.character-wrapper.active .number {
+  color: #a69cff;
+
+  transform:
+    translateY(-18px)
+    scale(1.15);
+
+  z-index: 30;
+}
+
+
+/* ========================================
+   SORTED
+======================================== */
+
+.character-wrapper.sorted .minion {
+  box-shadow:
+    0 0 25px
+      rgba(50, 220, 150, 0.35);
+}
+
+.character-wrapper.sorted .number {
+  color: #52d69b;
+}
+
+
+/* ========================================
+   CONTROLS
+======================================== */
+
+.controls {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 25px 30px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.07);
+}
+
+button {
+  border: none;
+
+  cursor: pointer;
+
+  padding: 11px 18px;
+
+  border-radius: 10px;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  transition:
+    0.2s;
+}
+
+button:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+}
+
+
+/* ========================================
+   START BUTTON
+======================================== */
+
+.primary-btn {
+  background: #8b7cff;
+
+  color: white;
+}
+
+.primary-btn:hover:not(:disabled) {
+  background: #7667ee;
+
+  transform:
+    translateY(-2px);
+}
+
+
+/* ========================================
+   SECONDARY BUTTONS
+======================================== */
+
+.secondary-btn {
+  background: #192235;
+
+  color: #c6cad6;
+}
+
+.secondary-btn:hover:not(:disabled) {
+  background: #232e46;
+}
+
+
+/* ========================================
+   SPEED CONTROL
+======================================== */
+
+.speed-control {
+  margin-left: auto;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: #858ca0;
+
+  font-size: 13px;
+}
+
+input[type="range"] {
+  width: 120px;
+
+  accent-color: #8b7cff;
+
+  cursor: pointer;
+}
+
+.speed-value {
+  min-width: 45px;
+
+  color: #a69cff;
+
+  font-size: 12px;
+}
+
+
+/* ========================================
+   EXPLANATION CARDS
+======================================== */
+
+.explanation {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 15px;
+
+  margin-top: 25px;
+}
+
+.explanation-card {
+  padding: 22px;
+
+  background: #0d1422;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 16px;
+
+  display: flex;
+
+  gap: 15px;
+}
+
+.step-number {
+  color: #8b7cff;
+
+  font-weight: 800;
+
+  font-size: 13px;
+}
+
+.explanation-card h3 {
+  font-size: 15px;
+
+  margin-bottom: 8px;
+}
+
+.explanation-card p {
+  color: #858ca0;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* ========================================
+   CODE SECTION
+======================================== */
+
+.code-section {
+  margin-top: 25px;
+
+  background: #0b101b;
+
+  border-radius: 16px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  overflow: hidden;
+}
+
+.code-header {
+  padding: 14px 20px;
+
+  background: #111827;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color: #8d94a8;
+
+  font-size: 12px;
+}
+
+pre {
+  padding: 25px;
+
+  overflow-x: auto;
+
+  color: #cdd3e1;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+
+  .header {
+    padding: 0 20px;
+  }
+
+  .tagline {
+    display: none;
+  }
+
+  .container {
+    padding: 35px 0;
+  }
+
+  .visualizer-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 20px;
+  }
+
+  .complexity {
+    width: 100%;
+
+    justify-content: space-between;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+  }
+
+  .speed-control {
+    width: 100%;
+
+    margin-left: 0;
+
+    margin-top: 10px;
+  }
+
+  .explanation {
+    grid-template-columns: 1fr;
+  }
+
+}
